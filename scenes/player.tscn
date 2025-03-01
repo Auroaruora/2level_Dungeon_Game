@@ -481,4 +481,4 @@ script = ExtResource("1_soyx4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i521b")
 animation = &"idle_right"
-frame_progress = 0.533507
+frame_progress = 0.850375
