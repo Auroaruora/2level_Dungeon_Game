@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const speed = 100
 var current_dir = "none"
+
 func _ready():
 	$AnimatedSprite2D.play("idle_front")
 func _physics_process(delta):
@@ -51,15 +52,22 @@ func play_anim(movement):
 			anim.play("run_right")
 		elif movement == 0:
 			anim.play("idle_right")
-	if dir == "down":
+	if dir == "up":
 		anim.flip_h = false
 		if movement ==1:
 			anim.play("run_back")
 		elif movement == 0:
 			anim.play("idle_back")
-	if dir == "up":
+	if dir == "down":
 		anim.flip_h = false
 		if movement ==1:
 			anim.play("run_front")
 		elif movement == 0:
 			anim.play("idle_front")
+
+func _input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
+		for interactable in get_tree().get_nodes_in_group("interactable"):
+			if interactable.player_in_range:
+				interactable.interact()
+				break

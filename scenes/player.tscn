@@ -1,9 +1,12 @@
-[gd_scene load_steps=66 format=3 uid="uid://xg6osnrvfqbn"]
+[gd_scene load_steps=67 format=3 uid="uid://xg6osnrvfqbn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_soyx4"]
 [ext_resource type="Texture2D" uid="uid://c18oxorsji1a4" path="res://assets/Hana Caraka - Base Character [sample] 2/death.png" id="2_ax15r"]
 [ext_resource type="Texture2D" uid="uid://dhqdy0ccpral4" path="res://assets/Hana Caraka - Base Character [sample] 2/idle.png" id="3_1x16u"]
 [ext_resource type="Texture2D" uid="uid://bicnk18mlgj3r" path="res://assets/Hana Caraka - Base Character [sample] 2/run.png" id="4_qwlqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlv7i"]
+radius = 4.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_luor4"]
 atlas = ExtResource("2_ax15r")
@@ -477,8 +480,12 @@ animations = [{
 script = ExtResource("1_soyx4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 4)
+shape = SubResource("CircleShape2D_xlv7i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i521b")
 animation = &"idle_right"
 frame_progress = 0.741259
+
+[node name="Camera2D" type="Camera2D" parent="."]

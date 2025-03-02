@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://q67mivjpuetv"]
+
+[ext_resource type="Texture2D" uid="uid://c6hv8ryu26fg7" path="res://assets/kenney_tiny-dungeon/Tilemap/tilemap_packed.png" id="1_0lomd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kchfn"]
+size = Vector2(32, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0gjx"]
+atlas = ExtResource("1_0lomd")
+region = Rect2(160, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3hyf"]
+atlas = ExtResource("1_0lomd")
+region = Rect2(160, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_najhf"]
+atlas = ExtResource("1_0lomd")
+region = Rect2(160, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4x1e8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0gjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3hyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_najhf")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l0ac"]
+size = Vector2(22, 11)
+
+[node name="BigDoor" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_kchfn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4x1e8")
+animation = &"open"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_8l0ac")
