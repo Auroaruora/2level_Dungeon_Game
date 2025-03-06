@@ -4,6 +4,9 @@ extends CharacterBody2D
 #@onready var camera = $Camera2D
 @onready var detection_area = $Area2D  # Reference to the detection area
 @export var speed = 18  # Movement speed when chasing the player
+@export var max_health: int = 50
+var current_health: int
+@onready var health_bar = $HealthBar  # Ensure the Bat has a ProgressBar node
 
 var squash_speed = 10.0  # Controls how fast the squash effect happens
 var squash_amount_x = 0.3  # How much to squash (30%)
@@ -15,6 +18,8 @@ func _ready():
 #    camera.make_current()  # Ensure the camera follows the enemy
 	detection_area.body_entered.connect(_on_player_entered)
 	detection_area.body_exited.connect(_on_player_exited)
+	current_health = max_health
+	update_health_bar()
 
 func _process(delta):
 	time += delta * squash_speed
@@ -38,3 +43,35 @@ func _on_player_exited(body):
 	if body == player:
 		player = null
 		velocity = Vector2.ZERO  # Stop moving
+
+
+func _on_enemy_hitbox_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+		if body.is_in_group("player"):
+			player = body
+			attack_player()
+			
+
+# Function to attack the player
+func attack_player():
+	if player and player.global_position.distance_to(global_position) < 40:
+		player.take_damage(10)  # Bat deals 10 damage
+		
+		
+# Take Damage Function
+func take_damage(amount):
+	current_health -= amount
+	if current_health <= 0:
+		die()
+		update_health_bar()
+
+func update_health_bar():
+	health_bar.value = current_health
+
+func die():
+	queue_free()  # Bat disappears
+
+
+func _on_enemy_hitbox_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body == player:
+		player = null
+		velocity = Vector2.ZERO  

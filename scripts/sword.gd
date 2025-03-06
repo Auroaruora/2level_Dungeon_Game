@@ -17,10 +17,8 @@ func _on_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_range = false
 
-# 当玩家按E键时，Player会调用这个函数
 func interact():
 	if player_in_range:
-		# 假设场景中只有一个玩家，获取它并调用拾取方法
 		var player = get_tree().get_nodes_in_group("player")[0]
 		player.pickup_weapon(self)
 func attack():

@@ -3,9 +3,18 @@ extends CharacterBody2D
 const speed = 100
 var current_dir = "none"
 var current_weapon = null
+@export var max_health: int = 100
+var current_health: int
+
+@onready var health_bar = $HealthBar  # Make sure the health bar exists in the scene
+@onready var attack_area = $player_hitbox
 
 func _ready():
 	$AnimatedSprite2D.play("idle_front")
+	current_health = max_health
+	update_health_bar()
+	attack_area.area_entered.connect(on_attack_area_entered)
+	
 func _physics_process(delta):
 	player_movement(delta)
 
@@ -74,9 +83,42 @@ func _input(event):
 				break
 
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		attack()
 		if current_weapon:
 			current_weapon.attack()
 				
+func attack():
+	attack_area.monitoring = true  # Activate hitbox for this frame
+	await get_tree().create_timer(0.1).timeout  # Attack lasts 0.1 sec
+	attack_area.monitoring = false
+
+func on_attack_area_entered(area):
+	print("Attack hit something:", area.name)  # Debugging: Check if it detects anything
+	if area.name == "enemy_hitbox":  # Check if it's the bat's hitbox
+		var bat = area.get_parent()
+		if bat.has_method("take_damage"):  # Ensure bat has this function
+			print("Hit bat! Dealing damage...")
+			bat.take_damage(15)
+
+func take_damage(amount):
+	current_health -= amount
+	if current_health <= 0:
+		die()
+	update_health_bar()
+
+func update_health_bar():
+	health_bar.value = current_health
+
+func die():
+	queue_free()
+	
+func _on_player_hitbox_body_entered(body: Node2D) -> void:
+	if body.name == "EnemyHitbox":  # Check if it is the bat's hitbox
+		var bat = body.owner  # Get the Bat node correctly
+		if bat.has_method("take_damage"):  # Ensure the bat has this function
+			print("Hit bat:", bat)
+			bat.take_damage(15)
+			
 func pickup_weapon(weapon):
 	if current_weapon:
 		drop_weapon(current_weapon)

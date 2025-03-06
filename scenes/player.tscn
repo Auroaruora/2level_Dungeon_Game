@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://xg6osnrvfqbn"]
+[gd_scene load_steps=68 format=3 uid="uid://xg6osnrvfqbn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_soyx4"]
 [ext_resource type="Texture2D" uid="uid://c18oxorsji1a4" path="res://assets/Hana Caraka - Base Character [sample] 2/death.png" id="2_ax15r"]
@@ -476,6 +476,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2kfi"]
+radius = 12.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_soyx4")
 
@@ -485,10 +488,22 @@ shape = SubResource("CircleShape2D_xlv7i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i521b")
-animation = &"die_front"
-frame_progress = 0.422912
+animation = &"idle_right"
+frame_progress = 0.326161
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="player_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+shape = SubResource("CircleShape2D_s2kfi")
+
 [node name="WeaponSocket" type="Node2D" parent="."]
 z_as_relative = false
+position = Vector2(0, 1)
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
