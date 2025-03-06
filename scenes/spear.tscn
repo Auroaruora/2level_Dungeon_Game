@@ -1,18 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmh0bwv8bjpdj"]
 
-[ext_resource type="Script" path="res://scenes/spear.gd" id="1_ocq8f"]
+[ext_resource type="Script" path="res://scripts/spear.gd" id="1_46ie3"]
 [ext_resource type="Texture2D" uid="uid://c7kk0je418fuk" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0129.png" id="2_hgauv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrw8k"]
-size = Vector2(6, 14)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gtity"]
+radius = 15.0333
 
-[node name="spear" type="RigidBody2D"]
-position = Vector2(35, 26)
-script = ExtResource("1_ocq8f")
+[node name="spear" type="Area2D" groups=["interactables"]]
+script = ExtResource("1_46ie3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("2_hgauv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_jrw8k")
+shape = SubResource("CircleShape2D_gtity")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(6, 0)

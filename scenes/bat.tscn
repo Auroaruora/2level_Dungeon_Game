@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://r5uvh5a0weji"]
 
 [ext_resource type="Texture2D" uid="uid://cjelp6k66a8gl" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0120.png" id="1_w2qml"]
-[ext_resource type="Script" path="res://scenes/bat.gd" id="2_qgwpo"]
+[ext_resource type="Script" path="res://scripts/bat.gd" id="2_qgwpo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dl0tc"]
 radius = 106.0

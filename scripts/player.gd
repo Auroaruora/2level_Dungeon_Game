@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const speed = 100
 var current_dir = "none"
+var current_weapon = null
 
 func _ready():
 	$AnimatedSprite2D.play("idle_front")
@@ -10,22 +11,22 @@ func _physics_process(delta):
 
 func player_movement(delta):
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("move_right"):
 		current_dir ="right"
 		play_anim(1)
 		velocity.x = speed
 		velocity.y = 0
-	elif Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("move_left"):
 		current_dir ="left"
 		play_anim(1)
 		velocity.x = -speed
 		velocity.y = 0
-	elif Input.is_action_pressed("ui_up"):
+	elif Input.is_action_pressed("move_up"):
 		current_dir ="up"
 		play_anim(1)
 		velocity.x = 0
 		velocity.y = -speed
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed("move_down"):
 		current_dir ="down"
 		play_anim(1)
 		velocity.x = 0
@@ -71,3 +72,26 @@ func _input(event):
 			if interactable.player_in_range:
 				interactable.interact()
 				break
+
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if current_weapon:
+			current_weapon.attack()
+				
+func pickup_weapon(weapon):
+	if current_weapon:
+		drop_weapon(current_weapon)
+	current_weapon = weapon
+	if weapon.get_parent():
+		weapon.get_parent().remove_child(weapon)
+	$WeaponSocket.add_child(weapon)
+	weapon.position = Vector2.ZERO
+	weapon.remove_from_group("interactable")
+	weapon.attached = true
+
+func drop_weapon(weapon):
+	if weapon.get_parent():
+		weapon.get_parent().remove_child(weapon)
+	get_tree().current_scene.add_child(weapon)
+	weapon.global_position = global_position + Vector2(0, 50)
+	weapon.add_to_group("interactable")
+	current_weapon = null

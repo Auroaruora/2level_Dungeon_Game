@@ -15,11 +15,11 @@ size = Vector2(24, 12)
 
 [node name="SafeSpace" parent="." instance=ExtResource("1_8ndnt")]
 
-[node name="Chest" parent="." groups=["interactables"] instance=ExtResource("3_icisa")]
+[node name="Chest" parent="." instance=ExtResource("3_icisa")]
 position = Vector2(-137, -53)
 script = ExtResource("3_2kqg1")
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("2_v6ouo")]
+[node name="Player" parent="." instance=ExtResource("2_v6ouo")]
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
 position = Vector2(0, 158)
@@ -54,3 +54,5 @@ script = ExtResource("5_axgbb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-1, -10)
 shape = SubResource("RectangleShape2D_brl3p")
+
+[node name="LevelContainer" type="Node2D" parent="."]
