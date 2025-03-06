@@ -20,6 +20,7 @@ position = Vector2(-137, -53)
 script = ExtResource("3_2kqg1")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_v6ouo")]
+position = Vector2(0, -1)
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
 position = Vector2(0, 158)

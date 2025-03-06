@@ -318,22 +318,22 @@ position = Vector2(-15, 443.5)
 shape = SubResource("RectangleShape2D_vtkbn")
 
 [node name="bat" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(-12, -8)
+position = Vector2(-12, -7)
 
 [node name="bat2" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(235, -206)
+position = Vector2(235, -205)
 
 [node name="bat3" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(1, 12)
+position = Vector2(1, 13)
 
 [node name="bat4" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(13, -9)
+position = Vector2(13, -8)
 
 [node name="bat5" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(-217, 181)
+position = Vector2(-217, 182)
 
 [node name="bat6" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(-219, 207)
+position = Vector2(-219, 208)
 
 [node name="bat7" parent="." instance=ExtResource("7_vynka")]
-position = Vector2(-240, 197)
+position = Vector2(-240, 198)
