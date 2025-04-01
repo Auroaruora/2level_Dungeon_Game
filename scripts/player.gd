@@ -6,6 +6,9 @@ var current_weapon = null
 @export var max_health: int = 100
 var current_health: int
 
+var respawn_position: Vector2 = Vector2(-15, 420)
+var is_dead = false  # Prevent double damage or actions while dead
+
 @onready var health_bar = $PlayerHealthbar  # Make sure the health bar exists in the scene
 @onready var attack_area = $player_hitbox
 
@@ -17,6 +20,8 @@ func _ready():
 	attack_area.area_entered.connect(on_attack_area_entered)
 	
 func _physics_process(delta):
+	if is_dead:
+		return
 	player_movement(delta)
 
 func player_movement(delta):
@@ -48,9 +53,11 @@ func player_movement(delta):
 	move_and_slide()
 
 func play_anim(movement):
+	if is_dead:
+		return 
+		
 	var dir = current_dir
 	var anim = $AnimatedSprite2D
-	
 	if dir == "right":
 		anim.flip_h = false
 		if movement ==1:
@@ -75,6 +82,7 @@ func play_anim(movement):
 			anim.play("run_front")
 		elif movement == 0:
 			anim.play("idle_front")
+		
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
@@ -94,14 +102,14 @@ func attack():
 	attack_area.monitoring = false
 
 func on_attack_area_entered(area):
-	print("Attack hit something:", area.name)  # Debugging: Check if it detects anything
 	if area.name == "enemy_hitbox":  # Check if it's the bat's hitbox
 		var bat = area.get_parent()
 		if bat.has_method("take_damage"):  # Ensure bat has this function
-			print("Hit bat! Dealing damage...")
 			bat.take_damage(15)
 
 func take_damage(amount):
+	if is_dead:
+		return
 	current_health -= amount
 	if current_health <= 0:
 		die()
@@ -112,9 +120,42 @@ func update_health_bar():
 		health_bar.max_value = max_health
 		health_bar.value = current_health
 
+func play_death_animation():
+	var anim = $AnimatedSprite2D
+	print("Playing death animation. Direction:", current_dir)
+
+	match current_dir:
+		"up":
+			anim.flip_h = false
+			anim.play("die_back")
+			print("die_back animation played")
+		"down":
+			anim.flip_h = false
+			anim.play("die_front")
+			print("die_front animation played")
+		"left":
+			anim.flip_h = true
+			anim.play("die_right")
+			print("die_left animation played")
+		"right":
+			anim.flip_h = false
+			anim.play("die_right")
+			print("die_right animation played")
+
 
 func die():
-	queue_free()
+	is_dead = true
+	velocity = Vector2.ZERO
+	play_death_animation()
+
+	await get_tree().create_timer(2.0).timeout  # Wait for animation duration
+	global_position = respawn_position
+	current_health = max_health
+	update_health_bar()
+	is_dead = false
+	$AnimatedSprite2D.play("idle_front")
+
+
 	
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.name == "EnemyHitbox":  # Check if it is the bat's hitbox

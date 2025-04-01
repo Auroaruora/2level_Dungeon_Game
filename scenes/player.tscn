@@ -271,7 +271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yo7sm")
 }],
-"loop": true,
+"loop": false,
 "name": &"die_back",
 "speed": 5.0
 }, {
@@ -312,7 +312,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_681jd")
 }],
-"loop": true,
+"loop": false,
 "name": &"die_front",
 "speed": 5.0
 }, {
@@ -335,7 +335,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xiqqt")
 }],
-"loop": true,
+"loop": false,
 "name": &"die_right",
 "speed": 5.0
 }, {
@@ -490,8 +490,7 @@ shape = SubResource("CircleShape2D_xlv7i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i521b")
-animation = &"idle_right"
-frame_progress = 0.326161
+animation = &"die_back"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

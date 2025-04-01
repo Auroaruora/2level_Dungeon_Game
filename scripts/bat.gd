@@ -66,7 +66,6 @@ func take_damage(amount):
 
 func update_health_bar():
 	if health_bar:
-		print("HealthBar - max:", max_health, " current:", current_health)
 		health_bar.min_value = 0
 		health_bar.max_value = max_health
 		health_bar.value = current_health
