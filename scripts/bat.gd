@@ -4,9 +4,9 @@ extends CharacterBody2D
 #@onready var camera = $Camera2D
 @onready var detection_area = $Area2D  # Reference to the detection area
 @export var speed = 18  # Movement speed when chasing the player
-@export var max_health: int = 50
+@export var max_health: int = 100
 var current_health: int
-@onready var health_bar = $HealthBar  # Ensure the Bat has a ProgressBar node
+@onready var health_bar = $BatHealthbar  # Ensure the Bat has a ProgressBar node
 
 var squash_speed = 10.0  # Controls how fast the squash effect happens
 var squash_amount_x = 0.3  # How much to squash (30%)
@@ -65,7 +65,13 @@ func take_damage(amount):
 		update_health_bar()
 
 func update_health_bar():
-	health_bar.value = current_health
+	if health_bar:
+		print("HealthBar - max:", max_health, " current:", current_health)
+		health_bar.min_value = 0
+		health_bar.max_value = max_health
+		health_bar.value = current_health
+
+
 
 func die():
 	queue_free()  # Bat disappears

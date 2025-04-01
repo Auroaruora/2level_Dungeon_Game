@@ -1,9 +1,11 @@
-[gd_scene load_steps=68 format=3 uid="uid://xg6osnrvfqbn"]
+[gd_scene load_steps=70 format=3 uid="uid://xg6osnrvfqbn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_soyx4"]
 [ext_resource type="Texture2D" uid="uid://c18oxorsji1a4" path="res://assets/Hana Caraka - Base Character [sample] 2/death.png" id="2_ax15r"]
 [ext_resource type="Texture2D" uid="uid://dhqdy0ccpral4" path="res://assets/Hana Caraka - Base Character [sample] 2/idle.png" id="3_1x16u"]
 [ext_resource type="Texture2D" uid="uid://bicnk18mlgj3r" path="res://assets/Hana Caraka - Base Character [sample] 2/run.png" id="4_qwlqw"]
+[ext_resource type="Texture2D" uid="uid://c2liumoyxmqgh" path="res://assets/healthbarUnder.png" id="5_dmon4"]
+[ext_resource type="Texture2D" uid="uid://bxb8em3kbfvpt" path="res://assets/healthbarProgress.png" id="6_egixp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xlv7i"]
 radius = 4.0
@@ -493,9 +495,14 @@ frame_progress = 0.326161
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_right = 4.0
-offset_bottom = 27.0
+[node name="PlayerHealthbar" type="TextureProgressBar" parent="."]
+offset_left = -15.0
+offset_top = -16.0
+offset_right = 49.0
+offset_bottom = -6.0
+scale = Vector2(0.4608, 0.488613)
+texture_under = ExtResource("5_dmon4")
+texture_progress = ExtResource("6_egixp")
 
 [node name="player_hitbox" type="Area2D" parent="."]
 

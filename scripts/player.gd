@@ -6,10 +6,11 @@ var current_weapon = null
 @export var max_health: int = 100
 var current_health: int
 
-@onready var health_bar = $HealthBar  # Make sure the health bar exists in the scene
+@onready var health_bar = $PlayerHealthbar  # Make sure the health bar exists in the scene
 @onready var attack_area = $player_hitbox
 
 func _ready():
+	
 	$AnimatedSprite2D.play("idle_front")
 	current_health = max_health
 	update_health_bar()
@@ -107,7 +108,10 @@ func take_damage(amount):
 	update_health_bar()
 
 func update_health_bar():
-	health_bar.value = current_health
+	if health_bar:
+		health_bar.max_value = max_health
+		health_bar.value = current_health
+
 
 func die():
 	queue_free()

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://r5uvh5a0weji"]
+[gd_scene load_steps=8 format=3 uid="uid://r5uvh5a0weji"]
 
 [ext_resource type="Texture2D" uid="uid://cjelp6k66a8gl" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0120.png" id="1_w2qml"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="2_qgwpo"]
+[ext_resource type="Texture2D" uid="uid://c2liumoyxmqgh" path="res://assets/healthbarUnder.png" id="3_grhr1"]
+[ext_resource type="Texture2D" uid="uid://bxb8em3kbfvpt" path="res://assets/healthbarProgress.png" id="4_hfqex"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dl0tc"]
 radius = 106.0
@@ -27,9 +29,14 @@ shape = SubResource("CircleShape2D_dl0tc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ld2x6")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_right = 4.0
-offset_bottom = 27.0
+[node name="BatHealthbar" type="TextureProgressBar" parent="."]
+offset_left = -14.0
+offset_top = -15.0
+offset_right = 50.0
+offset_bottom = -5.0
+scale = Vector2(0.4608, 0.488613)
+texture_under = ExtResource("3_grhr1")
+texture_progress = ExtResource("4_hfqex")
 
 [node name="enemy_hitbox" type="Area2D" parent="."]
 
