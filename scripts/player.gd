@@ -25,64 +25,50 @@ func _physics_process(delta):
 	player_movement(delta)
 
 func player_movement(delta):
+	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	velocity = input_direction * speed
 	
 	if Input.is_action_pressed("move_right"):
 		current_dir ="right"
-		play_anim(1)
-		velocity.x = speed
-		velocity.y = 0
 	elif Input.is_action_pressed("move_left"):
 		current_dir ="left"
-		play_anim(1)
-		velocity.x = -speed
-		velocity.y = 0
 	elif Input.is_action_pressed("move_up"):
 		current_dir ="up"
-		play_anim(1)
-		velocity.x = 0
-		velocity.y = -speed
 	elif Input.is_action_pressed("move_down"):
 		current_dir ="down"
-		play_anim(1)
-		velocity.x = 0
-		velocity.y = speed
-	else:
-		play_anim(0)
-		velocity.x=0
-		velocity.y=0
+	play_anim()
 	move_and_slide()
 
-func play_anim(movement):
+func play_anim():
 	if is_dead:
 		return 
 		
-	var dir = current_dir
 	var anim = $AnimatedSprite2D
-	if dir == "right":
-		anim.flip_h = false
-		if movement ==1:
-			anim.play("run_right")
-		elif movement == 0:
-			anim.play("idle_right")
-	if dir == "left":
-		anim.flip_h = true
-		if movement ==1:
-			anim.play("run_right")
-		elif movement == 0:
-			anim.play("idle_right")
-	if dir == "up":
-		anim.flip_h = false
-		if movement ==1:
-			anim.play("run_back")
-		elif movement == 0:
-			anim.play("idle_back")
-	if dir == "down":
-		anim.flip_h = false
-		if movement ==1:
-			anim.play("run_front")
-		elif movement == 0:
-			anim.play("idle_front")
 		
+	if current_dir == "right":
+		anim.flip_h = false
+		if velocity == Vector2.ZERO:
+			anim.play("idle_right")
+		else:
+			anim.play("run_right")
+	if current_dir == "left":
+		anim.flip_h = true
+		if velocity == Vector2.ZERO:
+			anim.play("idle_right")
+		else:
+			anim.play("run_right")
+	if current_dir == "up":
+		anim.flip_h = false
+		if velocity == Vector2.ZERO:
+			anim.play("idle_back")
+		else:
+			anim.play("run_back")
+	if current_dir == "down":
+		anim.flip_h = false
+		if velocity == Vector2.ZERO:
+			anim.play("idle_front")
+		else:
+			anim.play("run_front")
 
 func _input(event):
 	# Trigger interaction when agreeing to open chest or on E key
@@ -94,8 +80,8 @@ func _input(event):
 				break
 
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		attack()
 		if current_weapon:
+			attack()
 			current_weapon.attack()
 				
 func attack():
@@ -108,6 +94,7 @@ func on_attack_area_entered(area):
 		var bat = area.get_parent()
 		if bat.has_method("take_damage"):  # Ensure bat has this function
 			bat.take_damage(15)
+			print("Bat took damage")
 
 func take_damage(amount):
 	if is_dead:
@@ -185,3 +172,4 @@ func drop_weapon(weapon):
 	# Do not allow swap between weapons after choosing one
 	# weapon.add_to_group("interactable")
 	current_weapon = null
+	weapon.attached = false

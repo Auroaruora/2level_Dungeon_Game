@@ -16,6 +16,7 @@ func _on_Area2D_body_entered(body):
 			player_in_range = true
 			GlobalVariables.weapon_chest_reached = true
 
+
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("player"):
 		# Allow the user to come back to the chest if they walk away

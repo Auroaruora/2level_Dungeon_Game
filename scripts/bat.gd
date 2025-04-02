@@ -1,25 +1,35 @@
 extends CharacterBody2D
 
-@onready var sprite = $Sprite2D
-#@onready var camera = $Camera2D
-@onready var detection_area = $Area2D  # Reference to the detection area
-@export var speed = 18  # Movement speed when chasing the player
 @export var max_health: int = 100
-var current_health: int
+@export var speed = 18  # Movement speed when chasing the player
+@export var target : Node2D
+@export var max_distance = 150 # Max distance between Bat and Player before Bat stops chase
+@onready var sprite = $Sprite2D
 @onready var health_bar = $BatHealthbar  # Ensure the Bat has a ProgressBar node
+@onready var navigation_agent = $NavigationAgent2D
 
+var current_health: int
+var attack_distance = 40
+var attack_damage = 10
 var squash_speed = 10.0  # Controls how fast the squash effect happens
 var squash_amount_x = 0.3  # How much to squash (30%)
 var squash_amount_y = 0.1  # How much to squash (10%)
 var time = 0.0  # Timer for oscillation
-var player = null  # Store reference to player
+var player_in_range = false # If player is in attack range
+var can_attack = true # If attack is off cooldown
+var attack_cooldown = 1.0 # Seconds between attacks
 
 func _ready():
-#    camera.make_current()  # Ensure the camera follows the enemy
-	detection_area.body_entered.connect(_on_player_entered)
-	detection_area.body_exited.connect(_on_player_exited)
 	current_health = max_health
 	update_health_bar()
+	call_deferred("setup")
+	pass
+	
+func setup():
+	await get_tree().physics_frame
+	# Get target position
+	if target:
+		navigation_agent.target_position = target.global_position
 
 func _process(delta):
 	time += delta * squash_speed
@@ -28,41 +38,49 @@ func _process(delta):
 	
 	sprite.scale = Vector2(1.0 + squash_factor_x, 1.0 - squash_factor_y)  # Squash effect
 
-	if player:  # If player detected, fly towards them
-		var direction = (player.global_position - global_position).normalized()
-		velocity = direction * speed
-		move_and_slide()
-
-# When the player enters detection range
-func _on_player_entered(body):
-	if body.is_in_group("player"):  # Ensure player has a "player" group
-		player = body
-
-# When the player leaves detection range
-func _on_player_exited(body):
-	if body == player:
-		player = null
-		velocity = Vector2.ZERO  # Stop moving
-
+	# Update target position
+	if target:
+		navigation_agent.target_position = target.global_position
+	
+	# Stop navigating if close enough
+	if navigation_agent.is_navigation_finished():
+		return
+	
+	# Update navigation path
+	var current_agent_position = global_position
+	var next_path_position = navigation_agent.get_next_path_position()
+	
+	# Check target distance
+	if current_agent_position.distance_to(navigation_agent.target_position) < max_distance:
+		velocity = current_agent_position.direction_to(next_path_position) * speed
+	else:
+		velocity = Vector2i.ZERO
+		
+	# Move
+	move_and_slide()
+		
+	# Attack
+	if player_in_range && can_attack:
+		attack_player()
+		can_attack = false
+		get_tree().create_timer(attack_cooldown).timeout.connect(func(): can_attack = true)
 
 func _on_enemy_hitbox_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-		if body.is_in_group("player"):
-			player = body
-			attack_player()
-			
+	if body == target:
+		player_in_range = true
 
 # Function to attack the player
 func attack_player():
-	if player and player.global_position.distance_to(global_position) < 40:
-		player.take_damage(10)  # Bat deals 10 damage
-		
+	if target and target.global_position.distance_to(global_position) < attack_distance:
+		target.take_damage(attack_damage)  # Bat deals damage
+		print("Bat attacked player for ", attack_damage, " damage")
 		
 # Take Damage Function
 func take_damage(amount):
 	current_health -= amount
 	if current_health <= 0:
 		die()
-		update_health_bar()
+	update_health_bar()
 
 func update_health_bar():
 	if health_bar:
@@ -70,13 +88,9 @@ func update_health_bar():
 		health_bar.max_value = max_health
 		health_bar.value = current_health
 
-
-
 func die():
 	queue_free()  # Bat disappears
 
-
 func _on_enemy_hitbox_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body == player:
-		player = null
-		velocity = Vector2.ZERO  
+	if body == target:
+		player_in_range = false
