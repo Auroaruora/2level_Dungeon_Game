@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dsoa41tivcben"]
+[gd_scene load_steps=18 format=3 uid="uid://dsoa41tivcben"]
 
 [ext_resource type="Texture2D" uid="uid://bchm01h3j7m55" path="res://assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="1_3lcqa"]
 [ext_resource type="Texture2D" uid="uid://c6hv8ryu26fg7" path="res://assets/kenney_tiny-dungeon/Tilemap/tilemap_packed.png" id="2_on8fj"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b7b7v8fplipi3" path="res://scenes/sword.tscn" id="7_5l5bu"]
 [ext_resource type="PackedScene" uid="uid://r5uvh5a0weji" path="res://scenes/bat.tscn" id="7_vynka"]
 [ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/dialog_ui.tscn" id="9_8bl05"]
+[ext_resource type="PackedScene" uid="uid://dn04ewr8upf5t" path="res://scenes/inventory_ui.tscn" id="10_85r6w"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xrn5g"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -401,6 +402,8 @@ target = NodePath("../Player")
 position = Vector2(-240, 197)
 target = NodePath("../Player")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ui" parent="CanvasLayer" instance=ExtResource("9_8bl05")]
+[node name="ui" parent="UI" instance=ExtResource("9_8bl05")]
+
+[node name="Inventory UI" parent="UI" instance=ExtResource("10_85r6w")]

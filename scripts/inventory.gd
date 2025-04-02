@@ -10,7 +10,14 @@ func add_item(item_data: Dictionary):
 	print("Added to inventory:", item_data)
 
 func remove_item(item_name: String):
-	items.erase(item_name)
+	for i in range(items.size()):
+		if items[i]["name"] == item_name:
+			items.remove_at(i)
+			return
+
 
 func has_item(item_name: String) -> bool:
-	return item_name in items
+	for item in items:
+		if item.has("name") and item["name"] == item_name:
+			return true
+	return false
