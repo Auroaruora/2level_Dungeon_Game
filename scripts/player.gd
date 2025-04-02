@@ -117,19 +117,15 @@ func play_death_animation():
 		"up":
 			anim.flip_h = false
 			anim.play("die_back")
-			print("die_back animation played")
 		"down":
 			anim.flip_h = false
 			anim.play("die_front")
-			print("die_front animation played")
 		"left":
 			anim.flip_h = true
 			anim.play("die_right")
-			print("die_left animation played")
 		"right":
 			anim.flip_h = false
 			anim.play("die_right")
-			print("die_right animation played")
 
 
 func die():
@@ -167,7 +163,7 @@ func pickup_weapon(weapon):
 func drop_weapon(weapon):
 	if weapon.get_parent():
 		weapon.get_parent().remove_child(weapon)
-	get_tree().current_scene.remove_child(weapon)
+	#get_tree().current_scene.remove_child(weapon)
 	weapon.global_position = global_position + Vector2(0, 50)
 	# Do not allow swap between weapons after choosing one
 	# weapon.add_to_group("interactable")

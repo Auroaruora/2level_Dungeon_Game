@@ -65,15 +65,12 @@ func _process(delta):
 		can_attack = false
 		get_tree().create_timer(attack_cooldown).timeout.connect(func(): can_attack = true)
 
-func _on_enemy_hitbox_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body == target:
-		player_in_range = true
+
 
 # Function to attack the player
 func attack_player():
 	if target and target.global_position.distance_to(global_position) < attack_distance:
 		target.take_damage(attack_damage)  # Bat deals damage
-		print("Bat attacked player for ", attack_damage, " damage")
 		
 # Take Damage Function
 func take_damage(amount):
@@ -91,6 +88,9 @@ func update_health_bar():
 func die():
 	queue_free()  # Bat disappears
 
+func _on_enemy_hitbox_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body == target:
+		player_in_range = true
 func _on_enemy_hitbox_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body == target:
 		player_in_range = false

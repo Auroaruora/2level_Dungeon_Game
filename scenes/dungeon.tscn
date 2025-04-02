@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/exit.gd" id="6_gl6q4"]
 [ext_resource type="PackedScene" uid="uid://b7b7v8fplipi3" path="res://scenes/sword.tscn" id="7_5l5bu"]
 [ext_resource type="PackedScene" uid="uid://r5uvh5a0weji" path="res://scenes/bat.tscn" id="7_vynka"]
-[ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/ui.tscn" id="9_8bl05"]
+[ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/dialog_ui.tscn" id="9_8bl05"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xrn5g"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)

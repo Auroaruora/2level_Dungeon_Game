@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpcjnno2o31ls"]
 
-[ext_resource type="PackedScene" uid="uid://6d3qam1p2bgf" path="res://scenes/safe_space.tscn" id="1_8ndnt"]
+[ext_resource type="PackedScene" uid="uid://6d3qam1p2bgf" path="res://scenes/first_level_map.tscn" id="1_8ndnt"]
 [ext_resource type="PackedScene" uid="uid://xg6osnrvfqbn" path="res://scenes/player.tscn" id="2_v6ouo"]
 [ext_resource type="Script" path="res://scripts/chest.gd" id="3_2kqg1"]
 [ext_resource type="PackedScene" uid="uid://cxy7hmxxp0oe0" path="res://scenes/chest.tscn" id="3_icisa"]
 [ext_resource type="Script" path="res://scripts/enter.gd" id="5_axgbb"]
-[ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/ui.tscn" id="6_sw7el"]
+[ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/dialog_ui.tscn" id="6_sw7el"]
 [ext_resource type="PackedScene" uid="uid://dn04ewr8upf5t" path="res://scenes/inventory_ui.tscn" id="7_mrppf"]
 [ext_resource type="PackedScene" uid="uid://77khsc0dhsho" path="res://scenes/key.tscn" id="8_trh7v"]
 
@@ -16,7 +16,7 @@ size = Vector2(24, 12)
 
 [node name="world" type="Node2D"]
 
-[node name="SafeSpace" parent="." instance=ExtResource("1_8ndnt")]
+[node name="FirstLevelMap" parent="." instance=ExtResource("1_8ndnt")]
 
 [node name="Chest" parent="." instance=ExtResource("3_icisa")]
 position = Vector2(-137, -53)
@@ -65,6 +65,6 @@ shape = SubResource("RectangleShape2D_brl3p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ui" parent="CanvasLayer" instance=ExtResource("6_sw7el")]
+[node name="DialogUI" parent="CanvasLayer" instance=ExtResource("6_sw7el")]
 
 [node name="Inventory UI" parent="CanvasLayer" instance=ExtResource("7_mrppf")]

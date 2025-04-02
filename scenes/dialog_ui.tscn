@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5cystyierkwn"]
 
 [ext_resource type="Texture2D" uid="uid://did3vgdhrdwlf" path="res://assets/kenney_ui-pack-pixel-adventure/Tilesheets/Large tiles/Thin outline/tilemap.png" id="1_peq8x"]
-[ext_resource type="Script" path="res://scenes/viewport_container.gd" id="1_sjy1r"]
+[ext_resource type="Script" path="res://scripts/viewport_container.gd" id="1_sjy1r"]
 [ext_resource type="FontFile" uid="uid://bcffg1shy3y37" path="res://assets/fonts/PixelOperator8.ttf" id="2_0wqx7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gjckn"]
@@ -20,7 +20,7 @@ region_rect = Rect2(99, 66, 32, 32)
 texture = ExtResource("1_peq8x")
 region_rect = Rect2(66, 0, 32, 32)
 
-[node name="ui" type="Control"]
+[node name="DialogUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,11 +30,10 @@ grow_vertical = 2
 
 [node name="viewportContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 125.0
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_sjy1r")
 
 [node name="uiContainer" type="HBoxContainer" parent="viewportContainer"]
