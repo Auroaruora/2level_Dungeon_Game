@@ -9,6 +9,7 @@ func _ready():
 	add_to_group("interactable")
 
 func _on_Area2D_body_entered(body):
+	print("entered")
 	if body.is_in_group("player"):
 		# Triggers UI to appear
 		if GlobalVariables.weapon_chest_reached == false:
@@ -17,6 +18,9 @@ func _on_Area2D_body_entered(body):
 
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("player"):
+		# Allow the user to come back to the chest if they walk away
+		if GlobalVariables.weapon_chest_finished == false:
+			GlobalVariables.weapon_chest_reached = false
 		player_in_range = false
 
 func interact():
