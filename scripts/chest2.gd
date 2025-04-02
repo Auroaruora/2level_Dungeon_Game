@@ -11,13 +11,14 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
 		player_in_range = true
+		UIPrompt.show_message("Press E to open")
 
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_range = false
 
 func interact():
-	if player_in_range:
+	if player_in_range and not is_open:
 		$AnimatedSprite2D.play("open")
 		is_open = true
 		drop_weapon()

@@ -78,8 +78,8 @@ func _input(event):
 				break
 
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		attack()
 		if current_weapon:
+			attack()
 			current_weapon.attack()
 				
 func attack():
@@ -169,3 +169,4 @@ func drop_weapon(weapon):
 	weapon.global_position = global_position + Vector2(0, 50)
 	weapon.add_to_group("interactable")
 	current_weapon = null
+	weapon.attached = false
