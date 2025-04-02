@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 UIPrompt="*res://scenes/UIPrompt.tscn"
 GlobalVariables="*res://scripts/global_variables.gd"
+Inventory="*res://scripts/inventory.gd"
 
 [global_group]
 
