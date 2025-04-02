@@ -10,14 +10,17 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
-		player_in_range = true
+		# Triggers UI to appear
+		if GlobalVariables.weapon_chest_reached == false:
+			player_in_range = true
+			GlobalVariables.weapon_chest_reached = true
 
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_range = false
 
 func interact():
-	if player_in_range:
+	if player_in_range and GlobalVariables.weapon_chest_yes:
 		$AnimatedSprite2D.play("open")
 		is_open = true
 		drop_weapon()

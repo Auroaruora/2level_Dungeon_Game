@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://lski3avrci6t"]
+[gd_scene load_steps=8 format=3 uid="uid://c5cystyierkwn"]
 
 [ext_resource type="Texture2D" uid="uid://did3vgdhrdwlf" path="res://assets/kenney_ui-pack-pixel-adventure/Tilesheets/Large tiles/Thin outline/tilemap.png" id="1_peq8x"]
+[ext_resource type="Script" path="res://scenes/viewport_container.gd" id="1_sjy1r"]
 [ext_resource type="FontFile" uid="uid://bcffg1shy3y37" path="res://assets/fonts/PixelOperator8.ttf" id="2_0wqx7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gjckn"]
@@ -34,6 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_sjy1r")
 
 [node name="uiContainer" type="HBoxContainer" parent="viewportContainer"]
 custom_minimum_size = Vector2(0, 100)
@@ -146,3 +148,6 @@ theme_override_fonts/font = ExtResource("2_0wqx7")
 text = "NO"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer/yesButton" to="viewportContainer" method="_on_yes_button_pressed"]
+[connection signal="pressed" from="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer/noButton" to="viewportContainer" method="_on_no_button_pressed"]

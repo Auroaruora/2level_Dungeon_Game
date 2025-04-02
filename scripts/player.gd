@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const speed = 100
+const speed = 200
 var current_dir = "none"
 var current_weapon = null
 @export var max_health: int = 100
@@ -85,7 +85,9 @@ func play_anim(movement):
 		
 
 func _input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
+	# Trigger interaction when agreeing to open chest or on E key
+	if (event is InputEventKey and event.pressed and event.keycode == KEY_E) \
+		or GlobalVariables.weapon_chest_yes:
 		for interactable in get_tree().get_nodes_in_group("interactable"):
 			if interactable.player_in_range:
 				interactable.interact()
@@ -178,7 +180,8 @@ func pickup_weapon(weapon):
 func drop_weapon(weapon):
 	if weapon.get_parent():
 		weapon.get_parent().remove_child(weapon)
-	get_tree().current_scene.add_child(weapon)
+	get_tree().current_scene.remove_child(weapon)
 	weapon.global_position = global_position + Vector2(0, 50)
-	weapon.add_to_group("interactable")
+	# Do not allow swap between weapons after choosing one
+	# weapon.add_to_group("interactable")
 	current_weapon = null

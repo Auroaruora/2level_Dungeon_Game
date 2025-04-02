@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 UIPrompt="*res://scenes/UIPrompt.tscn"
+GlobalVariables="*res://scripts/global_variables.gd"
 
 [global_group]
 
