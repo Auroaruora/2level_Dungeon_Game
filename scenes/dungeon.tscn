@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dsoa41tivcben"]
+[gd_scene load_steps=19 format=3 uid="uid://dsoa41tivcben"]
 
 [ext_resource type="Texture2D" uid="uid://bchm01h3j7m55" path="res://assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="1_3lcqa"]
 [ext_resource type="Texture2D" uid="uid://c6hv8ryu26fg7" path="res://assets/kenney_tiny-dungeon/Tilemap/tilemap_packed.png" id="2_on8fj"]
 [ext_resource type="PackedScene" uid="uid://cxy7hmxxp0oe0" path="res://scenes/chest.tscn" id="3_58dc4"]
 [ext_resource type="PackedScene" uid="uid://xg6osnrvfqbn" path="res://scenes/player.tscn" id="4_kk4yc"]
 [ext_resource type="Script" path="res://scripts/chest2.gd" id="4_n1a85"]
+[ext_resource type="PackedScene" uid="uid://s86xdikcgww3" path="res://scenes/companion.tscn" id="6_4xy56"]
 [ext_resource type="Script" path="res://scripts/exit.gd" id="6_gl6q4"]
 [ext_resource type="PackedScene" uid="uid://b7b7v8fplipi3" path="res://scenes/sword.tscn" id="7_5l5bu"]
 [ext_resource type="PackedScene" uid="uid://r5uvh5a0weji" path="res://scenes/bat.tscn" id="7_vynka"]
@@ -363,6 +364,10 @@ script = ExtResource("4_n1a85")
 
 [node name="Player" parent="." instance=ExtResource("4_kk4yc")]
 position = Vector2(-15, 420)
+
+[node name="Companion" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_4xy56")]
+position = Vector2(32, 381)
+target = NodePath("../Player")
 
 [node name="Area2D2" parent="." instance=ExtResource("7_5l5bu")]
 position = Vector2(-15, 415)
