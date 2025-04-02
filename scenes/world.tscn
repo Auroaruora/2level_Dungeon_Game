@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpcjnno2o31ls"]
+[gd_scene load_steps=9 format=3 uid="uid://cpcjnno2o31ls"]
 
 [ext_resource type="PackedScene" uid="uid://6d3qam1p2bgf" path="res://scenes/safe_space.tscn" id="1_8ndnt"]
 [ext_resource type="PackedScene" uid="uid://xg6osnrvfqbn" path="res://scenes/player.tscn" id="2_v6ouo"]
 [ext_resource type="Script" path="res://scripts/chest.gd" id="3_2kqg1"]
 [ext_resource type="PackedScene" uid="uid://cxy7hmxxp0oe0" path="res://scenes/chest.tscn" id="3_icisa"]
 [ext_resource type="Script" path="res://scripts/enter.gd" id="5_axgbb"]
+[ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/ui.tscn" id="6_sw7el"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hgm12"]
 
@@ -56,3 +57,7 @@ position = Vector2(-1, -10)
 shape = SubResource("RectangleShape2D_brl3p")
 
 [node name="LevelContainer" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ui" parent="CanvasLayer" instance=ExtResource("6_sw7el")]

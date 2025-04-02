@@ -1,0 +1,153 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5cystyierkwn"]
+
+[ext_resource type="Texture2D" uid="uid://did3vgdhrdwlf" path="res://assets/kenney_ui-pack-pixel-adventure/Tilesheets/Large tiles/Thin outline/tilemap.png" id="1_peq8x"]
+[ext_resource type="Script" path="res://scenes/viewport_container.gd" id="1_sjy1r"]
+[ext_resource type="FontFile" uid="uid://bcffg1shy3y37" path="res://assets/fonts/PixelOperator8.ttf" id="2_0wqx7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gjckn"]
+texture = ExtResource("1_peq8x")
+region_rect = Rect2(66, 66, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ppse"]
+texture = ExtResource("1_peq8x")
+region_rect = Rect2(66, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ehp81"]
+texture = ExtResource("1_peq8x")
+region_rect = Rect2(99, 66, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jh1yn"]
+texture = ExtResource("1_peq8x")
+region_rect = Rect2(66, 0, 32, 32)
+
+[node name="ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="viewportContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sjy1r")
+
+[node name="uiContainer" type="HBoxContainer" parent="viewportContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="viewportContainer/uiContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(800, 125)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_peq8x")
+region_rect = Rect2(99, 0, 32, 32)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="viewportContainer/uiContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="textContainer" type="VBoxContainer" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/textContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+
+[node name="text" type="Label" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/textContainer/MarginContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.580392, 0.686275, 0.776471, 1)
+theme_override_fonts/font = ExtResource("2_0wqx7")
+theme_override_font_sizes/font_size = 24
+text = "text goes here"
+autowrap_mode = 1
+
+[node name="buttonContainer" type="VBoxContainer" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+
+[node name="yesButton" type="Button" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer"]
+custom_minimum_size = Vector2(70, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/hover = SubResource("StyleBoxTexture_gjckn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gjckn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_4ppse")
+
+[node name="Label" type="Label" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer/yesButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -11.5
+offset_right = 35.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.317647, 0.372549, 0.419608, 1)
+theme_override_fonts/font = ExtResource("2_0wqx7")
+text = "YES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="noButton" type="Button" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer"]
+custom_minimum_size = Vector2(70, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/hover = SubResource("StyleBoxTexture_ehp81")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ehp81")
+theme_override_styles/normal = SubResource("StyleBoxTexture_jh1yn")
+
+[node name="Label" type="Label" parent="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer/noButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -8.0
+offset_right = 35.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.317647, 0.372549, 0.419608, 1)
+theme_override_fonts/font = ExtResource("2_0wqx7")
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer/yesButton" to="viewportContainer" method="_on_yes_button_pressed"]
+[connection signal="pressed" from="viewportContainer/uiContainer/NinePatchRect/MarginContainer/HBoxContainer/buttonContainer/noButton" to="viewportContainer" method="_on_no_button_pressed"]

@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=16 format=3 uid="uid://dsoa41tivcben"]
 
 [ext_resource type="Texture2D" uid="uid://bchm01h3j7m55" path="res://assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="1_3lcqa"]
@@ -8,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/exit.gd" id="6_gl6q4"]
 [ext_resource type="PackedScene" uid="uid://b7b7v8fplipi3" path="res://scenes/sword.tscn" id="7_5l5bu"]
 [ext_resource type="PackedScene" uid="uid://r5uvh5a0weji" path="res://scenes/bat.tscn" id="7_vynka"]
+[ext_resource type="PackedScene" uid="uid://c5cystyierkwn" path="res://scenes/ui.tscn" id="9_8bl05"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xrn5g"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -399,3 +401,8 @@ target = NodePath("../Player")
 [node name="bat7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
 position = Vector2(-240, 197)
 target = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ui" parent="CanvasLayer" instance=ExtResource("9_8bl05")]
+
