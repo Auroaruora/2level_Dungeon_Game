@@ -80,7 +80,7 @@ func take_damage(amount):
 	current_health -= amount
 	if current_health <= 0:
 		die()
-		update_health_bar()
+	update_health_bar()
 
 func update_health_bar():
 	if health_bar:

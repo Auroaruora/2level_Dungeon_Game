@@ -92,6 +92,7 @@ func on_attack_area_entered(area):
 		var bat = area.get_parent()
 		if bat.has_method("take_damage"):  # Ensure bat has this function
 			bat.take_damage(15)
+			print("Bat took damage")
 
 func take_damage(amount):
 	if is_dead:
