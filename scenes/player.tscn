@@ -493,6 +493,7 @@ sprite_frames = SubResource("SpriteFrames_i521b")
 animation = &"die_back"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
 
 [node name="PlayerHealthbar" type="TextureProgressBar" parent="."]
 offset_left = -15.0
