@@ -44,7 +44,7 @@ func _input(event):
 
 func attack():
 	var spawn_pos = $SpawnPoint.global_position
-	var target_position = get_global_mouse_position()
+	#var target_position = get_global_mouse_position()
 	var direction = Vector2.RIGHT.rotated(global_rotation)
 
 	# Create bullet data (no separate scene, just stored in an array)

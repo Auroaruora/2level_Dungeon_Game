@@ -3,7 +3,7 @@ extends MarginContainer
 @onready var ui: HBoxContainer = $uiContainer
 @onready var textLabel : Label = $uiContainer/NinePatchRect/MarginContainer/HBoxContainer/textContainer/MarginContainer/text
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Make ui appear once player reaches the chest
 	if GlobalVariables.weapon_chest_reached == true and GlobalVariables.weapon_chest_finished == false:
 		ui.visible = true

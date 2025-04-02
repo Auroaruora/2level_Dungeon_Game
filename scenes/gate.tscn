@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://q67mivjpuetv"]
 
-[ext_resource type="Script" path="res://scenes/gate.gd" id="1_5c4b7"]
+[ext_resource type="Script" path="res://scripts/gate.gd" id="1_5c4b7"]
 [ext_resource type="Texture2D" uid="uid://c6hv8ryu26fg7" path="res://assets/kenney_tiny-dungeon/Tilemap/tilemap_packed.png" id="1_dsko2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kchfn"]
@@ -52,5 +52,5 @@ animation = &"open"
 position = Vector2(0, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 6.5)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_8l0ac")

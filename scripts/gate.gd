@@ -29,10 +29,6 @@ func open_gate():
 	is_open = true
 	print("Opening gate...")
 	sprite.play("open")  # Your animation: frames 0 → 1 → 2
-	collider.disabled = true  # Allow player to walk through
-
-	# Optional: Inventory.remove_item(required_item_name)
-	# Inventory.remove_item(required_item_name)
 
 func _enter_next_scene():
 	get_tree().change_scene_to_file(dungeon_scene)
