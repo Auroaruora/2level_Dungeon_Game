@@ -2,9 +2,7 @@ extends Area2D
 
 @export var bullet_speed: float = 500  # Speed of bullets
 @export var bullet_lifetime: float = 2.0  # Bullet duration
-@export var bullet_radius: float = 2.0  # Bullet size
 
-var bullets = []  # Store active bullets
 var player_in_range = false
 var attached = false
 
@@ -27,41 +25,23 @@ func _process(delta):
 		# Make spear point to mouse
 		look_at(get_global_mouse_position())
 
-		# Move and update bullets
-		for bullet in bullets:
-			bullet["position"] += bullet["direction"] * bullet_speed * delta
-			bullet["time_left"] -= delta
-
-		# Remove bullets that have expired
-		bullets = bullets.filter(func(b): return b["time_left"] > 0)
-
-		# Redraw bullets
-		queue_redraw()
-
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		attack()
 
 func attack():
-	var spawn_pos = $SpawnPoint.global_position
-	#var target_position = get_global_mouse_position()
-	var direction = Vector2.RIGHT.rotated(global_rotation)
-
-	# Create bullet data (no separate scene, just stored in an array)
-	var bullet = {
-		"position": spawn_pos,
-		"direction": direction,
-		"time_left": bullet_lifetime
-	}
-	bullets.append(bullet)
+	var bullet_scene = preload("res://scenes/bullet.tscn")
+	var bullet = bullet_scene.instantiate()
+	
+	bullet.global_position = $SpawnPoint.global_position
+	bullet.direction = (get_global_mouse_position() - global_position).normalized()
+	
+	bullet.rotation = bullet.direction.angle()
+	
+	get_tree().current_scene.add_child(bullet)
 
 func interact():
 	if player_in_range:
 		var player = get_tree().get_nodes_in_group("player")[0]
 		player.pickup_weapon(self)
 		
-func _draw():
-	# Draw bullets as circles
-	for bullet in bullets:
-		var local_pos = to_local(bullet["position"])
-		draw_circle(local_pos, bullet_radius, Color.WHITE)

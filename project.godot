@@ -25,6 +25,7 @@ Inventory="*res://scripts/inventory.gd"
 
 interactables=""
 player=""
+enemy_hitbox=""
 
 [input]
 

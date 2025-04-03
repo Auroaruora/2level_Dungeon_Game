@@ -29,7 +29,7 @@ scale = Vector2(0.4608, 0.488613)
 texture_under = ExtResource("3_grhr1")
 texture_progress = ExtResource("4_hfqex")
 
-[node name="enemy_hitbox" type="Area2D" parent="."]
+[node name="enemy_hitbox" type="Area2D" parent="." groups=["enemy_hitbox"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
 shape = SubResource("CircleShape2D_24ct6")
