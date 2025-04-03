@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2u1ptwkt3rbv"]
+[gd_scene load_steps=9 format=3 uid="uid://c2u1ptwkt3rbv"]
 
+[ext_resource type="Script" path="res://scripts/portal.gd" id="1_6kpcs"]
 [ext_resource type="Texture2D" uid="uid://d120ew77px5f2" path="res://assets/portal/portalsSpriteSheet.png" id="1_wvwl1"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sb4nb"]
-radius = 15.0
-height = 46.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6cll"]
+radius = 28.2843
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ikxr4"]
 atlas = ExtResource("1_wvwl1")
@@ -42,10 +42,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_6kpcs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_sb4nb")
+shape = SubResource("CircleShape2D_i6cll")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e1jyg")

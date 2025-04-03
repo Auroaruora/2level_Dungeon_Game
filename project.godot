@@ -20,12 +20,14 @@ config/icon="res://assets/icon.svg"
 UIPrompt="*res://scenes/UIPrompt.tscn"
 GlobalVariables="*res://scripts/global_variables.gd"
 Inventory="*res://scripts/inventory.gd"
+GameManager="*res://scenes/GameManager.tscn"
 
 [global_group]
 
 interactables=""
 player=""
 enemy_hitbox=""
+enemy=""
 
 [input]
 

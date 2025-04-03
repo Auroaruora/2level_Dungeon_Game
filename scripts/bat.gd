@@ -18,6 +18,7 @@ var time = 0.0  # Timer for oscillation
 var player_in_range = false # If player is in attack range
 var can_attack = true # If attack is off cooldown
 var attack_cooldown = 1.0 # Seconds between attacks
+var is_dead := false
 
 func _ready():
 	current_health = max_health
@@ -32,6 +33,7 @@ func setup():
 		navigation_agent.target_position = target.global_position
 
 func _process(delta):
+	add_to_group("enemy")
 	time += delta * squash_speed
 	var squash_factor_x = sin(time) * squash_amount_x
 	var squash_factor_y = sin(time) * squash_amount_y
@@ -86,6 +88,11 @@ func update_health_bar():
 		health_bar.value = current_health
 
 func die():
+	if is_dead:
+		return
+	is_dead = true
+	get_node("/root/GameManager").enemy_died(global_position)
+	await get_tree().process_frame
 	queue_free()  # Bat disappears
 
 func _on_enemy_hitbox_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:

@@ -379,31 +379,31 @@ script = ExtResource("6_gl6q4")
 position = Vector2(-15, 443.5)
 shape = SubResource("RectangleShape2D_vtkbn")
 
-[node name="bat" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(-12, -8)
 target = NodePath("../Player")
 
-[node name="bat2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat2" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(235, -206)
 target = NodePath("../Player")
 
-[node name="bat3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat3" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(1, 12)
 target = NodePath("../Player")
 
-[node name="bat4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat4" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(13, -9)
 target = NodePath("../Player")
 
-[node name="bat5" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat5" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(-217, 181)
 target = NodePath("../Player")
 
-[node name="bat6" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat6" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(-219, 207)
 target = NodePath("../Player")
 
-[node name="bat7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_vynka")]
+[node name="bat7" parent="." node_paths=PackedStringArray("target") groups=["enemy"] instance=ExtResource("7_vynka")]
 position = Vector2(-240, 197)
 target = NodePath("../Player")
 
