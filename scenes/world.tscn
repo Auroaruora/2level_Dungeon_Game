@@ -25,7 +25,7 @@ script = ExtResource("3_2kqg1")
 [node name="Player" parent="." instance=ExtResource("2_v6ouo")]
 
 [node name="key" parent="." instance=ExtResource("8_trh7v")]
-position = Vector2(0, 40)
+position = Vector2(137, -13)
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
 position = Vector2(0, 158)

@@ -32,6 +32,7 @@ func setup():
 		navigation_agent.target_position = target.global_position
 
 func _process(delta):
+	add_to_group("enemy")
 	time += delta * squash_speed
 	var squash_factor_x = sin(time) * squash_amount_x
 	var squash_factor_y = sin(time) * squash_amount_y
