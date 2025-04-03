@@ -15,7 +15,6 @@ func remove_item(item_name: String):
 			items.remove_at(i)
 			return
 
-
 func has_item(item_name: String) -> bool:
 	for item in items:
 		if item.has("name") and item["name"] == item_name:
